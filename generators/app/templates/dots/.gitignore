@@ -1,0 +1,15 @@
+node_modules
+public/bower_components
+public/index.html
+public/**/*-styles.html
+public/index-inline.css
+npm-debug.log
+*.log
+.DS_Store
+temp
+dist
+.idea
+.github/
+.vscode/
+predix-scripts/
+package-lock.json

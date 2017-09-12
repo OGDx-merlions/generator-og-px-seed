@@ -1,0 +1,6 @@
+{
+  "name": "<%= project%>",
+  "version": "<%= version%>",
+  "private": true,
+  "author": "<%= author%>"
+}

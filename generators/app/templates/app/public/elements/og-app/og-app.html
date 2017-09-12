@@ -1,0 +1,163 @@
+<!-- import polymer -->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<!-- import page level css -->
+<link rel="import" href="og-app-styles.html">
+
+<!-- app route -->
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/px-app-helpers/px-app-route/px-app-route.html"/>
+<!-- px components -->
+<link rel="import" href="../../bower_components/px-branding-bar/px-branding-bar.html"/>
+<link rel="import" href="../../bower_components/px-app-helpers/px-app-header/px-app-header.html"/>
+<link rel="import" href="../../bower_components/px-app-nav/px-app-nav.html">
+<link rel="import" href="../../bower_components/px-view/px-view.html">
+<link rel="import" href="../../bower_components/px-icon-set/px-icon-set.html">
+<!-- seed app components -->
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="og-app">
+  <template>
+
+    <!-- apply imported seed app style module -->
+    <style include="og-app-styles"></style>
+    <px-app-header>
+      <div class="flex flex--row flex--right flex--bottom right-nav">
+        <div><px-icon icon="px-nav:search"></px-icon></div>
+        <div class="chat-icon"><px-icon icon="px-com:chat"></px-icon></div>
+        <div class="avatar"><img src="avatar.png"></div>
+      </div>
+    </px-app-header>
+    <px-branding-bar slot="branding-bar" application-title="[[appHeader]]"></px-branding-bar>
+    <px-app-nav
+      slot="app-nav"
+      class="navbars"
+      items="[[navItems]]"
+      collapse-with-icon="true"
+      collapse-at="450"
+      selected-route='["dashboard"]'>
+    </px-app-nav>
+
+    <div class="viewport">
+      <div class="content-wrapper">
+
+        <main class="u-pt-- u-pr-- u-pl--" role="main">
+          <!-- app-location captures url and assigns _route value -->
+          <app-location
+            id="carbonLocation"
+            route="{{_route}}"
+            use-hash-as-path>
+          </app-location>
+
+          <!-- main /rmd route and view -->
+          <app-route
+            route="[[_route]]"
+            pattern="/dashboard"
+            update-nav-route
+            use-hash-as-path
+            active="{{dashboardActive}}">
+          </app-route>
+          <px-view id="dashboardPxView"
+            active="[[dashboardActive]]"
+            element-href="/elements/views/dashboard/dashboard-view.html"
+            load-async="true">
+          </px-view>
+
+        </main>
+
+      </div>
+    </div>
+
+    <!-- <seed-footer footer-links='[[footerLinks]]'></seed-footer> -->
+    <iron-ajax id="configAjaxEl" url="/config" auto></iron-ajax>
+  </template>
+  <script>
+    Polymer({
+      is: 'og-app',
+
+      properties: {
+
+        appHeader: {
+          type: String
+        },
+
+        routesActive: {
+          type: Boolean,
+          value: false
+        },
+
+        //Global application object
+        global: {
+          type: Object,
+          value: function() {
+            return {
+              version: '1.0',
+              name: 'OG App'
+            }
+          }
+        },
+
+        navItems: {
+          type: Array,
+          value: function() {
+            return [
+              {
+                "label": "Dashboard",
+                "id": "dashboard",
+                "path": "/dashboard",
+                "icon": "px-fea:dashboard"
+              }, {
+                "label": "Alerts",
+                "id": "alerts",
+                "path": "#",
+                "icon": "px-fea:alerts"
+              }, {
+                "path": "#",
+                "icon":"px-fea:cases",
+                "label":"Cases",
+                "id": "cases"
+              }, {
+                "path": "#",
+                "icon":"px-fea:analysis",
+                "label":"Analysis",
+                "id": "analysis"
+              }
+            ]
+          }
+        },
+
+        footerLinks: {
+          type: Array,
+          value: function() {
+            return []
+          }
+        }
+      },
+
+      observers: ['_routeChanged(_route)'],
+
+      ready: function(){
+        this._checkForDefaultRoute();
+        this.$.configAjaxEl.addEventListener('response', function(evt) {
+          // We're getting some global config from the server.
+          // console.log('config', evt.detail.response);
+          this.appHeader = evt.detail.response.appHeader;
+          this.$.dashboardPxView.elementData = evt.detail.response;
+        }.bind(this));
+      },
+
+      _checkForDefaultRoute: function() {
+        // set default route to /rmd
+        var l = window.location;
+        if((l.hash === "#/" || l.hash === "") && l.pathname === "/") {
+          l.hash = "/dashboard";
+        }
+      },
+
+      _routeChanged: function(newRoute) {
+      }
+
+    });
+  </script>
+</dom-module>
