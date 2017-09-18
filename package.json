@@ -1,7 +1,6 @@
 {
   "name": "generator-og-px-seed",
   "version": "0.1.0",
-  "private": false,
   "description": "Yeoman Generator for OG Predix Seed Application",
   "keywords": [
     "yeoman-generator",
