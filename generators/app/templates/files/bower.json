@@ -49,6 +49,7 @@
     "px-functions-design": "^2.0.0",
     "iron-flex-layout": "^2.0.0",
     "iron-iconset-svg": "^2.0.0",
-    "px-mixins-design": "^1.0.0"
+    "px-mixins-design": "^1.0.0",
+    "webcomponentsjs": "^0.7.24"
   }
 }

@@ -17,6 +17,7 @@ module.exports = function(gulp) {
       'public/bower_components/font-awesome',
 
       'public/bower_components/px-theme',
+      'public/bower_components/px-dark-theme',
       'public/bower_components/px-typography-design',
       'public/bower_components/px-polymer-font-awesome',
       'public/bower_components/px-data-table'
@@ -29,10 +30,10 @@ module.exports = function(gulp) {
     });
 
     var publicFiles = gulp.src(['public/*.*']).pipe(gulp.dest('./dist/public'));
-    var docsFiles = gulp.src(['public/docs/**/*.*']).pipe(gulp.dest('./dist/public/docs'));
+    var resourceFiles = gulp.src(['public/resources/**/*.*']).pipe(gulp.dest('./dist/public/resources'));
     var server = gulp.src(['server/**/*.*']).pipe(gulp.dest('./dist/server'))
     var packageFile = gulp.src(['package.json']).pipe(gulp.dest('dist'));
 
-    return merge(server, packageFile, extraStreams, publicFiles, docsFiles);
+    return merge(server, packageFile, extraStreams, publicFiles, resourceFiles);
   };
 };

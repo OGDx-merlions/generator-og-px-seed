@@ -3,6 +3,8 @@ const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
 const gulpSequence = require('gulp-sequence');
 
+const bump = require('gulp-bump');
+
 
 var dev = process.argv.indexOf('--dist') < 0;
 
@@ -22,7 +24,7 @@ gulp.task('compile:index', ['compile:sass'], getTask('compile.index'));
 // -----------------------------------------------------------------------------
 // Task: Serve : Start
 // -----------------------------------------------------------------------------
-gulp.task('serve:dev:start', getTask('serve.dev.start'));
+gulp.task('serve:dev:start', ['transpile:scripts'], getTask('serve.dev.start'));
 gulp.task('serve:dist:start', ['dist'], getTask('serve.dist.start'));
 
 // -----------------------------------------------------------------------------
@@ -34,7 +36,7 @@ gulp.task('watch:public', getTask('watch.public'));
 // Task: Dist (Build app ready for deployment)
 // 	clean, compile:sass, compile:index, copy, bundle
 // -----------------------------------------------------------------------------
-gulp.task('dist', ['dist:copy'], getTask('compile.polymer'));
+gulp.task('dist', ['dist:copy', 'transpile:scripts'], getTask('compile.polymer'));
 
 // -----------------------------------------------------------------------------
 // Task: Dist : Copy source files for deploy to dist/
@@ -45,6 +47,32 @@ gulp.task('dist:copy', ['dist:clean', 'compile:index'], getTask('dist.copy'));
 // Task: Dist : Clean 'dist/'' folder
 // -----------------------------------------------------------------------------
 gulp.task('dist:clean', getTask('dist.clean'));
+
+// -----------------------------------------------------------------------------
+// Task: Transpile : Convert between EcmaScript Versions
+// -----------------------------------------------------------------------------
+gulp.task('transpile:scripts', getTask('transpile.scripts'));
+
+// -----------------------------------------------------------------------------
+// Task: Bump : Bumps project version
+// -----------------------------------------------------------------------------
+gulp.task('bump:patch', function(){
+	gulp.src(['./bower.json', './package.json'])
+    .pipe(bump({type:'patch'}))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump:minor', function(){
+	gulp.src(['./bower.json', './package.json'])
+    .pipe(bump({type:'minor'}))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump:major', function(){
+	gulp.src(['./bower.json', './package.json'])
+    .pipe(bump({type:'major'}))
+    .pipe(gulp.dest('./'));
+});
 
 // -----------------------------------------------------------------------------
 //  Task: Default (compile source, start server, watch for changes)
