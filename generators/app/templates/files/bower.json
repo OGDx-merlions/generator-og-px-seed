@@ -1,6 +1,6 @@
 {
   "name": "<%= project%>",
-  "version": "^<%= version%>",
+  "version": "<%= version%>",
   "private": true,
   "ignore": [
     "**/.*",
