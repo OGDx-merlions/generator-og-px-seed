@@ -8,4 +8,6 @@ module.exports = function() {
   // http://localhost:5000/mock-api/predix-asset/asset?filter=group=/group/plant-richmond-refinery
   const compressorJson = require(path.resolve(__dirname, '../sample-data/predix-asset/compressor-2017.json'));
   routes["asset"] = compressorJson;
+
+  return routes;
 };
