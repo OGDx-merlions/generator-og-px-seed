@@ -12,7 +12,7 @@ module.exports = class extends Generator {
       type    : 'input',
       name    : 'project',
       message : 'Your project name',
-      default : this.appname // Default to current folder name
+      default : 'my-app'
     },{
       type    : 'input',
       name    : 'version',

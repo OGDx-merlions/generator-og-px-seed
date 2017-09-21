@@ -24,7 +24,7 @@ gulp.task('compile:index', ['compile:sass'], getTask('compile.index'));
 // -----------------------------------------------------------------------------
 // Task: Serve : Start
 // -----------------------------------------------------------------------------
-gulp.task('serve:dev:start', ['transpile:scripts'], getTask('serve.dev.start'));
+gulp.task('serve:dev:start', ['transpile:scripts', 'compile:typescript'], getTask('serve.dev.start'));
 gulp.task('serve:dist:start', ['dist'], getTask('serve.dist.start'));
 
 // -----------------------------------------------------------------------------
@@ -36,7 +36,7 @@ gulp.task('watch:public', getTask('watch.public'));
 // Task: Dist (Build app ready for deployment)
 // 	clean, compile:sass, compile:index, copy, bundle
 // -----------------------------------------------------------------------------
-gulp.task('dist', ['dist:copy', 'transpile:scripts'], getTask('compile.polymer'));
+gulp.task('dist', ['dist:copy', 'transpile:scripts', 'compile:typescript'], getTask('compile.polymer'));
 
 // -----------------------------------------------------------------------------
 // Task: Dist : Copy source files for deploy to dist/
@@ -52,6 +52,11 @@ gulp.task('dist:clean', getTask('dist.clean'));
 // Task: Transpile : Convert between EcmaScript Versions
 // -----------------------------------------------------------------------------
 gulp.task('transpile:scripts', getTask('transpile.scripts'));
+
+// -----------------------------------------------------------------------------
+// Task: Compile TS : Convert Typescript to Ecmascript
+// -----------------------------------------------------------------------------
+gulp.task('compile:typescript', getTask('compile.ts'));
 
 // -----------------------------------------------------------------------------
 // Task: Bump : Bumps project version
