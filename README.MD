@@ -6,8 +6,8 @@ Yeoman Generator to create a Predix Seed App
 
 ## Usage
 ```
-npm install –g yeoman
-npm install -g og-px-seed
+npm install yo -g
+npm install og-px-seed -g
 yo og-px-seed
 
 ```
@@ -25,13 +25,13 @@ Node, npm and bower are necessary to install the component and dependencies afte
 First, install yeoman globally if you have not done so earlier.
 
 ```
-npm install –g yeoman
+npm install yo -g
 ```
 
 Second, install the og-px-seed Yeoman generator
 
 ```
-npm install -g og-px-seed
+npm install og-px-seed -g
 ```
 
 Finally, run the generator to scaffold a new seed app
