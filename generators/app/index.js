@@ -52,6 +52,11 @@ module.exports = class extends Generator {
       ans
     );
     this.fs.copyTpl(
+      this.templatePath('files/sw.js'),
+      this.destinationPath('public/sw.js'),
+      ans
+    );
+    this.fs.copyTpl(
       this.templatePath('files/bower.json'),
       this.destinationPath('bower.json'),
       ans
