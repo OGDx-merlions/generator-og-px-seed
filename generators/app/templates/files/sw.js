@@ -1,6 +1,7 @@
 importScripts('bower_components/sw-toolbox/sw-toolbox.js');
 
 const VERSION = '1.0';
+const CACHENAME = '<%= project%>';
 
 //Uncomment to enable Service worker caching
 toolbox.precache([
@@ -23,4 +24,10 @@ self.addEventListener('activate', event => event.waitUntil(self.clients.claim())
 //     'cache': {
 //       'name': CACHENAME +VERSION
 //     }
+// });
+
+// toolbox.router.get(/external-site.DOT.COM/, self.toolbox.fastest, {
+//   'cache': {
+//     'name': CACHENAME +VERSION
+//   }
 // });
