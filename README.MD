@@ -7,7 +7,7 @@ Yeoman Generator to create a Predix Seed App
 ## Usage
 ```
 npm install yo -g
-npm install og-px-seed -g
+npm install generator-og-px-seed -g
 yo og-px-seed
 
 ```
@@ -31,10 +31,13 @@ npm install yo -g
 Second, install the og-px-seed Yeoman generator
 
 ```
-npm install og-px-seed -g
+npm install generator-og-px-seed -g
 ```
+Create a new folder where you want to place your project files.
+Eg: If you want to create a project named og-my-project,
+create a folder 'og-my-project' and `cd` to it.
 
-Finally, run the generator to scaffold a new seed app
+Finally, run the generator to scaffold a new seed app inside the new folder
 
 ```
 yo og-px-seed
