@@ -105,7 +105,7 @@ module.exports = class extends Generator {
       this.destinationPath('.eslintrc.json')
     );
     this.fs.copy(
-      this.templatePath('dots/.gitignore'),
+      this.templatePath('dots/gitignore'),
       this.destinationPath('.gitignore')
     );
     this.fs.copy(
